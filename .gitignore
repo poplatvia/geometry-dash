@@ -1,24 +1,19 @@
-# Compiled Object files
-*.o
-*.obj
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Compiled Static libraries
-*.a
-*.lib
-
-# Executables
-*.exe
-
-# DUB
 .dub
 docs.json
 __dummy.html
 docs/
-
-# Code coverage
+/square-game-3
+square-game-3.so
+square-game-3.dylib
+square-game-3.dll
+square-game-3.a
+square-game-3.lib
+square-game-3-test-*
+*.exe
+*.pdb
+*.o
+*.obj
 *.lst
+raylib.lib
+raylib.dll
+dub.selections.json
