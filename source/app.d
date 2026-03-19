@@ -24,16 +24,17 @@ void main()
 	PlayerCube player = new PlayerCube();
 
 	Orb[] orbs = [
-		new YellowOrb(1400, 400, 20),
-		new PurpleOrb(1500, 300, 20),
-		new BlackOrb(1600, 300, 20),
-		new RedOrb(1300, 300, 20)
+		new YellowOrb(4400, 200, 20),
+		new PurpleOrb(4500, 100, 20),
+		new BlackOrb(4600, 200, 20),
+		new RedOrb(4300, 200, 20)
 	];
 
 	Portal[] portals = [
-		new BluePortal(1200, 0),
-		new YellowPortal(1700, 500),
-		new BluePortal(1700, 300)
+		new BluePortal(4200, 0),
+		new BluePortal(4700, 200),
+		new YellowPortal(4700, 600),
+		new YellowPortal(2700, 700)
 	];
 
 	Ground ground = new Ground();

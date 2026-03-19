@@ -14,7 +14,7 @@ public class PlayerCube
 	int velocityY;
 	bool isOnGround;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
-	int speed = 200; // Horizontal speed in pixels per second
+	int speed = 500; // Horizontal speed in pixels per second
 	float worldX; // Player's position in the world
 
 	this() 
