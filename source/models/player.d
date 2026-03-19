@@ -3,8 +3,10 @@ module models.player;
 import raylib;
 import helpers;
 
+import models.ground;
+
 // Similar to geometry dash cube
-public struct PlayerCube 
+public class PlayerCube 
 {
 	int x;
 	int y;
@@ -12,49 +14,42 @@ public struct PlayerCube
 	int velocityY;
 	bool isOnGround;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
+	int speed = 200; // Horizontal speed in pixels per second
+	float worldX; // Player's position in the world
 
-	this(int x, int y, int size)
+	this() 
 	{
-		this.x = x;
-		this.y = y;
-		this.size = size;
+		this.x = 710; // dynamically calculate this later based on screen size
+		this.worldX = 710; // dynamically calculate this later based on screen size
+		this.y = 500;
+		this.size = 110; // dynamically calculate this later based on screen size
 		this.velocityY = 0;
 		this.isOnGround = false;
 	}
 
-	void update()
+	void update(Ground ground)
 	{
-		// Apply gravity
-		velocityY += gravityDirection; // Gravity strength
+		velocityY += gravityDirection;
 		y += velocityY;
 
-		// Floor
-		if (gravityDirection == 1 && y >= 500)
+		int floorY = ground.groundY() - size / 2;
+		int ceilY  = size / 2;
+
+		if (y >= floorY)
 		{
-			y = 500;
+			y = floorY;
 			velocityY = 0;
 			isOnGround = true;
 		}
-		// Ceiling
-		if (gravityDirection == -1 && y <= 0)
+		if (y <= ceilY)
 		{
-			y = 0;
+			y = ceilY;
 			velocityY = 0;
 			isOnGround = true;
 		}
 
 		if (IsKeyDown(KeyboardKey.KEY_SPACE))
-		{
 			jump();
-		}
-		if (IsKeyDown(KeyboardKey.KEY_D))
-		{
-			x += 5;
-		}
-		if (IsKeyDown(KeyboardKey.KEY_A))
-		{
-			x -= 5;
-		}
 	}
 
 	void jump()

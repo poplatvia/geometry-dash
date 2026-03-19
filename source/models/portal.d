@@ -5,11 +5,13 @@ import models.player;
 
 class Portal
 {
-	int x, y, width, height;
+	int x, y;
+	private int width, height;
 
-	this(int x, int y, int width, int height)
+	this(int x, int y)
 	{
-		this.x = x; this.y = y; this.width = width; this.height = height;
+		this.x = x; this.y = y;
+		this.width = 50; this.height = 100;
 	}
 
 	void onTouch(ref PlayerCube player)
@@ -18,13 +20,13 @@ class Portal
 	protected bool isColliding(ref PlayerCube player)
 	{ return false; }
 
-	void draw()
+	void draw(int cameraX)
 	{}
 }
 
 class BluePortal : Portal
 {
-	this(int x, int y, int width, int height) { super(x, y, width, height); }
+	this(int x, int y) { super(x, y); }
 
 	override void onTouch(ref PlayerCube player)
 	{
@@ -38,21 +40,21 @@ class BluePortal : Portal
 
 	protected override bool isColliding(ref PlayerCube player)
 	{
-		return player.x + player.size / 2 > x - width / 2 &&
-			   player.x - player.size / 2 < x + width / 2 &&
+		return player.worldX + player.size / 2 > x - width / 2 &&
+			   player.worldX - player.size / 2 < x + width / 2 &&
 			   player.y + player.size / 2 > y - height / 2 &&
 			   player.y - player.size / 2 < y + height / 2;
 	}
 
-	override void draw()
+	override void draw(int cameraX)
 	{
-		DrawRectangle(x - width / 2, y - height / 2, width, height, Colors.BLUE);
+		DrawRectangle(x - width / 2 - cameraX, y - height / 2, width, height, Colors.BLUE);
 	}
 }
 
 class YellowPortal : Portal
 {
-	this(int x, int y, int width, int height) { super(x, y, width, height); }
+	this(int x, int y) { super(x, y); }
 
 	override void onTouch(ref PlayerCube player)
 	{
@@ -66,14 +68,14 @@ class YellowPortal : Portal
 
 	protected override bool isColliding(ref PlayerCube player)
 	{
-		return player.x + player.size / 2 > x - width / 2 &&
-			   player.x - player.size / 2 < x + width / 2 &&
+		return player.worldX + player.size / 2 > x - width / 2 &&
+			   player.worldX - player.size / 2 < x + width / 2 &&
 			   player.y + player.size / 2 > y - height / 2 &&
 			   player.y - player.size / 2 < y + height / 2;
 	}
 
-	override void draw()
+	override void draw(int cameraX)
 	{
-		DrawRectangle(x - width / 2, y - height / 2, width, height, Colors.YELLOW);
+		DrawRectangle(x - width / 2 - cameraX, y - height / 2, width, height, Colors.YELLOW);
 	}
 }

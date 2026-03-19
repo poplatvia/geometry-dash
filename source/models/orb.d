@@ -17,8 +17,8 @@ class Orb
 
     bool isNear(ref PlayerCube player)
     {
-        int dx = player.x - x;
-        int dy = player.y - y;
+        int dx = cast (int) (player.worldX - x);
+        int dy = cast (int) (player.y - y);
         int dist = cast(int)(sqrt(cast(float)(dx*dx + dy*dy)));
         return dist < radius + player.size / 2;
     }
@@ -31,7 +31,7 @@ class Orb
     }
 
     void onTouch(ref PlayerCube player) {}
-    void draw() {}
+    void draw(int cameraX) {}
 }
 
 class YellowOrb : Orb
@@ -40,13 +40,13 @@ class YellowOrb : Orb
 
     override void onTouch(ref PlayerCube player)
     {
-        player.velocityY = -15;
+        player.velocityY = -15 * player.gravityDirection;
         player.isOnGround = false;
     }
 
-    override void draw()
+    override void draw(int cameraX)
     {
-        DrawCircle(x, y, radius, Colors.YELLOW);
+        DrawCircle(x - cameraX, y, radius, Colors.YELLOW);
     }
 }
 
@@ -56,12 +56,12 @@ class PurpleOrb : Orb
 
 	override void onTouch(ref PlayerCube player)
 	{
-		player.velocityY = -5; // Weaker jump
+		player.velocityY = -5 * player.gravityDirection; // Weaker jump
 	}
 
-	override void draw()
+	override void draw(int cameraX)
 	{
-		DrawCircle(x, y, radius, Colors.PURPLE);
+		DrawCircle(x - cameraX, y, radius, Colors.PURPLE);
 	}
 }
 
@@ -71,13 +71,13 @@ class BlackOrb : Orb
 
 	override void onTouch(ref PlayerCube player)
 	{
-		player.velocityY = 100;
+		player.velocityY = 100 * player.gravityDirection;
 	}
 
-	override void draw()
+	override void draw(int cameraX)
 	{
-		DrawCircle(x, y, radius+radius/4, Colors.WHITE);
-		DrawCircle(x, y, radius, Colors.BLACK);
+		DrawCircle(x - cameraX, y, radius+radius/4, Colors.WHITE);
+		DrawCircle(x - cameraX, y, radius, Colors.BLACK);
 	}
 }
 
@@ -87,11 +87,11 @@ class RedOrb : Orb
 
 	override void onTouch(ref PlayerCube player)
 	{
-		player.velocityY = -25; // Stronger jump
+		player.velocityY = -25 * player.gravityDirection; // Stronger jump
 	}
 
-	override void draw()
+	override void draw(int cameraX)
 	{
-		DrawCircle(x, y, radius, Colors.RED);
+		DrawCircle(x - cameraX, y, radius, Colors.RED);
 	}
 }
