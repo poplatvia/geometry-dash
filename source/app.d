@@ -18,8 +18,10 @@ void main()
     SetConfigFlags(ConfigFlags.FLAG_FULLSCREEN_MODE);
 	SetConfigFlags(ConfigFlags.FLAG_VSYNC_HINT);
 	// get monitor dimensions for fullscreen
-	InitWindow(GetMonitorWidth(0), GetMonitorHeight(0), "SQUARE GAME 3");
+	InitWindow(0, 0, "SQUARE GAME 3");
     SetTargetFPS(60);
+
+	Ground ground = new Ground();
 
 	PlayerCube player = new PlayerCube();
 
@@ -37,17 +39,15 @@ void main()
 		new YellowPortal(2700, 700)
 	];
 
-	Ground ground = new Ground();
 	Background background = new Background();
 
 	float cameraX = 0;
-	immutable float playerScreenX = 100;
 
     while (!WindowShouldClose())
     {
 		float dt = GetFrameTime();
 		player.worldX += player.speed * dt;
-		cameraX = player.worldX - playerScreenX;
+		cameraX = player.worldX - player.x;
 
         BeginDrawing();
         background.draw(cast (int) cameraX);
@@ -58,8 +58,8 @@ void main()
 		}
 		foreach (Portal portal ; portals)
 		{
-			portal.draw(cast (int) cameraX);
 			portal.onTouch(player);
+			portal.draw(cast (int) cameraX);
 		}
 		ground.draw(cast (int) cameraX);
 		player.update(ground);

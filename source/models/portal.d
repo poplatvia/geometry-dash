@@ -18,7 +18,12 @@ class Portal
 	{}
 
 	protected bool isColliding(ref PlayerCube player)
-	{ return false; }
+	{
+		return player.worldX + player.size / 2 > x - width / 2 &&
+			   player.worldX - player.size / 2 < x + width / 2 &&
+			   player.y + player.size / 2 > y - height / 2 &&
+			   player.y - player.size / 2 < y + height / 2;
+	}
 
 	void draw(int cameraX)
 	{}
@@ -36,14 +41,6 @@ class BluePortal : Portal
 			player.gravityDirection = 1;
 			player.isOnGround = false;
 		}
-	}
-
-	protected override bool isColliding(ref PlayerCube player)
-	{
-		return player.worldX + player.size / 2 > x - width / 2 &&
-			   player.worldX - player.size / 2 < x + width / 2 &&
-			   player.y + player.size / 2 > y - height / 2 &&
-			   player.y - player.size / 2 < y + height / 2;
 	}
 
 	override void draw(int cameraX)
@@ -64,14 +61,6 @@ class YellowPortal : Portal
 			player.gravityDirection = -1;
 			player.isOnGround = false;
 		}
-	}
-
-	protected override bool isColliding(ref PlayerCube player)
-	{
-		return player.worldX + player.size / 2 > x - width / 2 &&
-			   player.worldX - player.size / 2 < x + width / 2 &&
-			   player.y + player.size / 2 > y - height / 2 &&
-			   player.y - player.size / 2 < y + height / 2;
 	}
 
 	override void draw(int cameraX)
