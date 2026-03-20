@@ -36,6 +36,21 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
             case "8": // Spike
                 objects ~= new Spike(x, (ground.groundY() + 15) - y);
                 break;
+            case "83": // block made of 9 subblocks
+                objects ~= new Block(x, (ground.groundY() + 15) - y);
+                break;
+            case "141": //purple orb
+                objects ~= new PurpleOrb(x, (ground.groundY() + 15) - y, 20);
+                break;
+            case "36": //yellow orb
+                objects ~= new YellowOrb(x, (ground.groundY() + 15) - y, 20);
+                break;
+            case "1333": //red orb
+                objects ~= new RedOrb(x, (ground.groundY() + 15) - y, 20);
+                break;
+            case "1330": //black orb
+                objects ~= new BlackOrb(x, (ground.groundY() + 15) - y, 20);
+                break;
             default:
                 writeln("Unknown object type: ", type);
                 break;
