@@ -52,7 +52,9 @@ class YellowOrb : Orb
 
     override void draw(int cameraX)
     {
-        DrawCircle(x - cameraX, y, radius, Colors.YELLOW);
+        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y), 35, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y, 35, Colors.YELLOW);
     }
 }
 
@@ -67,7 +69,9 @@ class PurpleOrb : Orb
 
 	override void draw(int cameraX)
 	{
-		DrawCircle(x - cameraX, y, radius, Colors.PURPLE);
+        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y), 30, 35, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y, 30, Colors.PURPLE);
 	}
 }
 
@@ -82,8 +86,9 @@ class BlackOrb : Orb
 
 	override void draw(int cameraX)
 	{
-		DrawCircle(x - cameraX, y, radius+radius/4, Colors.WHITE);
-		DrawCircle(x - cameraX, y, radius, Colors.BLACK);
+        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y), 35, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y, 35, Colors.BLACK);
 	}
 }
 
@@ -98,6 +103,8 @@ class RedOrb : Orb
 
 	override void draw(int cameraX)
 	{
-		DrawCircle(x - cameraX, y, radius, Colors.RED);
+        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y), 45, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y, 40, Colors.ORANGE);
 	}
 }

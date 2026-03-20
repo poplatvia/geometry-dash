@@ -6,7 +6,6 @@ import models.level_object;
 
 class Portal : LevelObject
 {
-	int x, y;
 	private int width, height;
 
 	this(int x, int y)
@@ -40,7 +39,7 @@ class BluePortal : Portal
 
 	override void draw(int cameraX)
 	{
-		DrawRectangle(x - width / 2 - cameraX, y - height / 2, width, height, Colors.BLUE);
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.BLUE);
 	}
 }
 
@@ -60,6 +59,30 @@ class YellowPortal : Portal
 
 	override void draw(int cameraX)
 	{
-		DrawRectangle(x - width / 2 - cameraX, y - height / 2, width, height, Colors.YELLOW);
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.YELLOW);
+	}
+}
+
+public class GreenPortal : Portal
+{
+	private bool wasColliding = false;
+
+	this(int x, int y) { super(x, y); }
+
+	override void update(ref PlayerCube player)
+	{
+		bool colliding = isColliding(player);
+		if (colliding && !wasColliding)
+		{
+			player.gravityDirection *= -1;
+			player.isOnGround = false;
+		}
+
+		wasColliding = colliding;
+	}
+
+	override void draw(int cameraX)
+	{
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.GREEN);
 	}
 }

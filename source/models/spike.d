@@ -10,7 +10,7 @@ class Spike : LevelObject
     int size;
     this(int x, int y)
     {
-        this.size = 50;
+        this.size = 55;
         super(x, y);
     }
     override void update(ref PlayerCube player)
@@ -39,8 +39,6 @@ class Spike : LevelObject
 
     override void draw(int cameraX)
     {
-        // draw red debug bounding box
-        DrawRectangle(x - cameraX - size, y - size, size, size, Colors.PURPLE);
         DrawTriangle(
             Vector2((x - cameraX) - size, y + size),
             Vector2((x - cameraX) + size, y + size),
