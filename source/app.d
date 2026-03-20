@@ -9,6 +9,7 @@ import models.orb;
 import models.portal;
 import models.ground;
 import models.background;
+import models.debug_view;
 
 import models.level_object;
 
@@ -39,6 +40,8 @@ void main()
 	];
 
 	Background background = new Background();
+
+	DebugView debugView = new DebugView();
 
 	float cameraX = 0;
 
@@ -73,6 +76,7 @@ void main()
 		ground.draw(cast (int) cameraX);
 		player.update(ground);
 		player.draw();
+		debugView.draw(cast (int) cameraX);
         EndDrawing();
     }
     CloseWindow();

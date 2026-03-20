@@ -28,6 +28,10 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
         int x = to!int(parts[1].strip());
         int y = to!int(parts[2].strip());
 
+        // normalize to cube size. Multiply everything by 110/15
+        x = cast(int)(x * (110.0 / 15.0));
+        y = cast(int)(y * (110.0 / 15.0));
+
         switch (type)
         {
             case "1": // block
