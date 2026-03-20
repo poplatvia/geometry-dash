@@ -15,7 +15,7 @@ public class PlayerCube
 	int rotation;
 	bool isOnGround;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
-	int speed = 500; // Horizontal speed in pixels per second
+	int speed = 700; // Horizontal speed in pixels per second
 	float worldX; // Player's position in the world
 
 	this() 
@@ -43,14 +43,20 @@ public class PlayerCube
 		{
 			y = floorY;
 			velocityY = 0;
-			isOnGround = true;
+			if (gravityDirection == 1)
+			{
+				isOnGround = true;
+			}
 			rotation = (rotation + 45) / 90 * 90;  // snap to nearest 90°
 		}
 		if (y <= ceilY)
 		{
 			y = ceilY;
 			velocityY = 0;
-			isOnGround = true;
+			if (gravityDirection == -1)
+			{
+				isOnGround = true;
+			}
 			rotation = (rotation + 45) / 90 * 90;  // snap to nearest 90°
 		}
 

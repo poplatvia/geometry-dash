@@ -2,17 +2,19 @@ module models.orb;
 
 import raylib;
 import models.player;
+import models.level_object;
 
 import std.math;
 
 
-class Orb 
+class Orb : LevelObject
 {
-    int x, y, radius;
-
+    int radius;
+    
     this(int x, int y, int radius)
     {
-        this.x = x; this.y = y; this.radius = radius;
+        super(x, y);
+        this.radius = radius;
     }
 
     bool isNear(ref PlayerCube player)
@@ -23,15 +25,19 @@ class Orb
         return dist < radius + player.size / 2;
     }
 
+    void onTouch(ref PlayerCube player) {}
+
     // Check proximity and apply effect if space pressed
-    void update(ref PlayerCube player)
+    override void update(ref PlayerCube player)
     {
         if (isNear(player) && IsKeyPressed(KeyboardKey.KEY_SPACE))
             onTouch(player);
     }
 
-    void onTouch(ref PlayerCube player) {}
-    void draw(int cameraX) {}
+    override void draw(int cameraX)
+    {
+        DrawCircle(x - cameraX, y, radius, Colors.GRAY);
+    }
 }
 
 class YellowOrb : Orb

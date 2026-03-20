@@ -17,3 +17,4 @@ square-game-3-test-*
 raylib.lib
 raylib.dll
 dub.selections.json
+*.py

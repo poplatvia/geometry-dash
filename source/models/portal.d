@@ -2,20 +2,18 @@ module models.portal;
 
 import raylib;
 import models.player;
+import models.level_object;
 
-class Portal
+class Portal : LevelObject
 {
 	int x, y;
 	private int width, height;
 
 	this(int x, int y)
 	{
-		this.x = x; this.y = y;
+		super(x, y);
 		this.width = 50; this.height = 100;
 	}
-
-	void onTouch(ref PlayerCube player)
-	{}
 
 	protected bool isColliding(ref PlayerCube player)
 	{
@@ -24,16 +22,13 @@ class Portal
 			   player.y + player.size / 2 > y - height / 2 &&
 			   player.y - player.size / 2 < y + height / 2;
 	}
-
-	void draw(int cameraX)
-	{}
 }
 
 class BluePortal : Portal
 {
 	this(int x, int y) { super(x, y); }
 
-	override void onTouch(ref PlayerCube player)
+	override void update(ref PlayerCube player)
 	{
 		if (isColliding(player))
 		{
@@ -53,7 +48,7 @@ class YellowPortal : Portal
 {
 	this(int x, int y) { super(x, y); }
 
-	override void onTouch(ref PlayerCube player)
+	override void update(ref PlayerCube player)
 	{
 		if (isColliding(player))
 		{

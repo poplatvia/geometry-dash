@@ -10,6 +10,10 @@ import models.portal;
 import models.ground;
 import models.background;
 
+import models.level_object;
+
+import setup;
+
 void main()
 {
     // call this before using raylib
@@ -25,12 +29,7 @@ void main()
 
 	PlayerCube player = new PlayerCube();
 
-	Orb[] orbs = [
-		new YellowOrb(4400, 200, 20),
-		new PurpleOrb(4500, 100, 20),
-		new BlackOrb(4600, 200, 20),
-		new RedOrb(4300, 200, 20)
-	];
+	LevelObject[] objects = loadObjectsFromFile(ground);
 
 	Portal[] portals = [
 		new BluePortal(4200, 0),
@@ -45,20 +44,30 @@ void main()
 
     while (!WindowShouldClose())
     {
-		float dt = GetFrameTime();
-		player.worldX += player.speed * dt;
-		cameraX = player.worldX - player.x;
+		if (IsKeyDown(KeyboardKey.KEY_D))
+			{
+			float dt = GetFrameTime();
+			player.worldX += player.speed * dt;
+			cameraX = player.worldX - player.x;
+		}
+
+		if (IsKeyDown(KeyboardKey.KEY_A))
+		{
+			float dt = GetFrameTime();
+			player.worldX -= player.speed * dt;
+			cameraX = player.worldX - player.x;
+		}
 
         BeginDrawing();
         background.draw(cast (int) cameraX);
-		foreach (Orb orb ; orbs)
+		foreach (LevelObject object ; objects)
 		{
-			orb.update(player);
-			orb.draw(cast (int) cameraX);
+			object.update(player);
+			object.draw(cast (int) cameraX);
 		}
 		foreach (Portal portal ; portals)
 		{
-			portal.onTouch(player);
+			portal.update(player);
 			portal.draw(cast (int) cameraX);
 		}
 		ground.draw(cast (int) cameraX);
