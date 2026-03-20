@@ -5,12 +5,14 @@ import raylib;
 import models.level_object;
 import models.player;
 
+import helpers;
+
 class Block : LevelObject
 {
     int size;
     this(int x, int y)
     {
-        this.size = 120;
+        this.size = 110;
         super(x, y);
     }
     override void update(ref PlayerCube player)
@@ -20,6 +22,7 @@ class Block : LevelObject
 
     override void draw(int cameraX)
     {
-        DrawRectangle(x - cameraX - size/2, y - size/2, size, size, Colors.BLACK);
+        // transform 110 pixels down
+        DrawRectangleCentered(x - cameraX, y, size, size, Colors.BLACK);
     }
 }

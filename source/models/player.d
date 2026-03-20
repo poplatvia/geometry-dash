@@ -21,7 +21,7 @@ public class PlayerCube
 	this() 
 	{
 		this.x = 710; // dynamically calculate this later based on screen size
-		this.worldX = 710; // dynamically calculate this later based on screen size
+		this.worldX = -500; // dynamically calculate this later based on screen size
 		this.y = 500;
 		this.size = 110; // dynamically calculate this later based on screen size
 		this.velocityY = 0;

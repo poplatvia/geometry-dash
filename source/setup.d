@@ -32,28 +32,30 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
         x = cast(int)(x * (110.0 / 15.0));
         y = cast(int)(y * (110.0 / 15.0));
 
+        int offset = 110/2;
+
         switch (type)
         {
             case "1": // block
-                objects ~= new Block(x, (ground.groundY() + 15) - y);
+                objects ~= new Block(x - offset, (ground.groundY()) - y + offset);
                 break;
             case "8": // Spike
-                objects ~= new Spike(x, (ground.groundY() + 15) - y);
+                objects ~= new Spike(x - offset, (ground.groundY()) - y + offset);
                 break;
             case "83": // block made of 9 subblocks
-                objects ~= new Block(x, (ground.groundY() + 15) - y);
+                objects ~= new Block(x - offset, (ground.groundY()) - y + offset);
                 break;
             case "141": //purple orb
-                objects ~= new PurpleOrb(x, (ground.groundY() + 15) - y, 20);
+                objects ~= new PurpleOrb(x - offset, (ground.groundY()) - y + offset, 20);
                 break;
             case "36": //yellow orb
-                objects ~= new YellowOrb(x, (ground.groundY() + 15) - y, 20);
+                objects ~= new YellowOrb(x - offset, (ground.groundY()) - y + offset, 20);
                 break;
             case "1333": //red orb
-                objects ~= new RedOrb(x, (ground.groundY() + 15) - y, 20);
+                objects ~= new RedOrb(x - offset, (ground.groundY()) - y + offset, 20);
                 break;
             case "1330": //black orb
-                objects ~= new BlackOrb(x, (ground.groundY() + 15) - y, 20);
+                objects ~= new BlackOrb(x - offset, (ground.groundY()) - y + offset, 20);
                 break;
             default:
                 writeln("Unknown object type: ", type);

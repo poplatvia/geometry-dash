@@ -76,7 +76,7 @@ void main()
 		ground.draw(cast (int) cameraX);
 		player.update(ground);
 		player.draw();
-		debugView.draw(cast (int) cameraX);
+		debugView.draw(cast (int) cameraX, ground);
         EndDrawing();
     }
     CloseWindow();
