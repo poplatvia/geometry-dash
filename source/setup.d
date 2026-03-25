@@ -43,6 +43,9 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
             case "8": // Spike
                 objects ~= new Spike(x - offset, (ground.groundY()) - y + offset);
                 break;
+            case "39": // small spike
+                objects ~= new SmallSpike(x - offset, (ground.groundY()) - y + offset);
+                break;
             case "83": // block made of 9 subblocks
                 objects ~= new Block(x - offset, (ground.groundY()) - y + offset);
                 break;

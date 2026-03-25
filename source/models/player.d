@@ -28,6 +28,11 @@ public class PlayerCube
 		this.isOnGround = false;
 	}
 
+	void snap() 
+	{
+		rotation = (rotation + 45) / 90 * 90;
+	}
+
 	void update(Ground ground)
 	{
 		velocityY += gravityDirection;
@@ -47,7 +52,7 @@ public class PlayerCube
 			{
 				isOnGround = true;
 			}
-			rotation = (rotation + 45) / 90 * 90;  // snap to nearest 90°
+			snap();
 		}
 		if (y <= ceilY)
 		{
@@ -57,7 +62,7 @@ public class PlayerCube
 			{
 				isOnGround = true;
 			}
-			rotation = (rotation + 45) / 90 * 90;  // snap to nearest 90°
+			snap();
 		}
 
 		if (IsKeyDown(KeyboardKey.KEY_SPACE))
