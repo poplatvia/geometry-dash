@@ -10,6 +10,7 @@ import models.portal;
 import models.ground;
 import models.spike;
 import models.block;
+import models.debug_block;
 import models.level_object;
 
 LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.csv")
@@ -71,7 +72,7 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
                 objects ~= new GreenPortal(x - offset, (ground.groundY()) - y/2 + offset);
                 break;
             default:
-                writeln("Unknown object type: ", type);
+                objects ~= new DebugBlock(x - offset, (ground.groundY()) - y/2, type);
                 break;
         }
     }
