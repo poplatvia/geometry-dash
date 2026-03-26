@@ -15,7 +15,7 @@ class Block : LevelObject
         this.size = 110;
         super(x, y);
     }
-    override void update(ref PlayerCube player)
+    override void update(ref Player player)
     {
         // if touching the top of the block, on ground and reset velocity
         int playerLeft = cast (int) (player.worldX - player.size / 2);

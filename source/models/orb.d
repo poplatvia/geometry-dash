@@ -17,7 +17,7 @@ class Orb : LevelObject
         this.radius = radius;
     }
 
-    bool isNear(ref PlayerCube player)
+    bool isNear(ref Player player)
     {
         int dx = cast (int) (player.worldX - x);
         int dy = cast (int) (player.y - y);
@@ -25,10 +25,10 @@ class Orb : LevelObject
         return dist < radius + player.size / 2;
     }
 
-    void onTouch(ref PlayerCube player) {}
+    void onTouch(ref Player player) {}
 
     // Check proximity and apply effect if space pressed
-    override void update(ref PlayerCube player)
+    override void update(ref Player player)
     {
         if (isNear(player) && IsKeyPressed(KeyboardKey.KEY_SPACE))
             onTouch(player);
@@ -44,7 +44,7 @@ class YellowOrb : Orb
 {
     this(int x, int y, int radius) { super(x, y, radius); }
 
-    override void onTouch(ref PlayerCube player)
+    override void onTouch(ref Player player)
     {
         player.velocityY = -15 * player.gravityDirection;
         player.isOnGround = false;
@@ -62,7 +62,7 @@ class PurpleOrb : Orb
 {
 	this(int x, int y, int radius) { super(x, y, radius); }
 
-	override void onTouch(ref PlayerCube player)
+	override void onTouch(ref Player player)
 	{
 		player.velocityY = -5 * player.gravityDirection; // Weaker jump
 	}
@@ -79,7 +79,7 @@ class BlackOrb : Orb
 {
 	this(int x, int y, int radius) { super(x, y, radius); }
 
-	override void onTouch(ref PlayerCube player)
+	override void onTouch(ref Player player)
 	{
 		player.velocityY = 100 * player.gravityDirection;
 	}
@@ -96,7 +96,7 @@ class RedOrb : Orb
 {
 	this(int x, int y, int radius) { super(x, y, radius); }
 
-	override void onTouch(ref PlayerCube player)
+	override void onTouch(ref Player player)
 	{
 		player.velocityY = -25 * player.gravityDirection; // Stronger jump
 	}

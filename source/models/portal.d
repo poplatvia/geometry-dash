@@ -14,7 +14,7 @@ class Portal : LevelObject
 		this.width = 50; this.height = 100;
 	}
 
-	protected bool isColliding(ref PlayerCube player)
+	protected bool isColliding(ref Player player)
 	{
 		return player.worldX + player.size / 2 > x - width / 2 &&
 			   player.worldX - player.size / 2 < x + width / 2 &&
@@ -27,7 +27,7 @@ class BluePortal : Portal
 {
 	this(int x, int y) { super(x, y); }
 
-	override void update(ref PlayerCube player)
+	override void update(ref Player player)
 	{
 		if (isColliding(player))
 		{
@@ -47,7 +47,7 @@ class YellowPortal : Portal
 {
 	this(int x, int y) { super(x, y); }
 
-	override void update(ref PlayerCube player)
+	override void update(ref Player player)
 	{
 		if (isColliding(player))
 		{
@@ -69,7 +69,7 @@ public class GreenPortal : Portal
 
 	this(int x, int y) { super(x, y); }
 
-	override void update(ref PlayerCube player)
+	override void update(ref Player player)
 	{
 		bool colliding = isColliding(player);
 		if (colliding && !wasColliding)
@@ -93,7 +93,7 @@ public class CubePortal : Portal
 
 	this(int x, int y) { super(x, y); }
 
-	override void update(ref PlayerCube player)
+	override void update(ref Player player)
 	{
 		bool colliding = isColliding(player);
 		if (colliding && !wasColliding)
@@ -116,7 +116,7 @@ public class ShipPortal : Portal
 
 	this(int x, int y) { super(x, y); }
 
-	override void update(ref PlayerCube player)
+	override void update(ref Player player)
 	{
 		bool colliding = isColliding(player);
 		if (colliding && !wasColliding)

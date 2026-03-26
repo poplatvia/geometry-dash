@@ -14,7 +14,7 @@ enum Mode {
 }
 
 // Similar to geometry dash cube
-public class PlayerCube 
+public class Player
 {
 	int x;
 	int y;
@@ -22,6 +22,7 @@ public class PlayerCube
 	float velocityY;
 	int rotation;
 	bool isOnGround;
+	bool isJumping;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
 	int speed = 700; // Horizontal speed in pixels per second
 	float worldX; // Player's position in the world
@@ -37,6 +38,7 @@ public class PlayerCube
 		this.size = 110; // dynamically calculate this later based on screen size
 		this.velocityY = 0;
 		this.isOnGround = false;
+		this.isJumping = false;
 		mode = Mode.Cube;
 	}
 
@@ -47,11 +49,29 @@ public class PlayerCube
 
 	void update(Ground ground)
 	{
-		velocityY += gravityDirection * 1.64;
+		switch (mode)
+		{
+			case Mode.Cube:
+				velocityY += gravityDirection * 1.64 * 1.8;
+				break;
+			case Mode.Ship:
+				velocityY += gravityDirection;
+				break;
+			case Mode.Wave:
+				if (!isJumping)
+				{
+					velocityY += 10 * gravityDirection;
+				}
+				break;
+			default:
+				break;
+
+		}
 		y += to!int(velocityY);
+		
 
 		if (!isOnGround)
-			rotation += 5 * gravityDirection;
+			rotation += 10 * gravityDirection;
 
 		int floorY = ground.groundY() - size / 2;
 		int ceilY  = size / 2 - 10000;
@@ -77,8 +97,13 @@ public class PlayerCube
 			snap();
 		}
 
-		if (IsKeyDown(KeyboardKey.KEY_SPACE))
+		if (IsKeyDown(KeyboardKey.KEY_SPACE)) {
+			isJumping = true;
 			jump();
+		}
+		else {
+			isJumping = false;
+		}
 	}
 
 	void jump()
@@ -88,7 +113,7 @@ public class PlayerCube
 			case Mode.Cube:
 				if (isOnGround)
 				{
-					velocityY = -32 * gravityDirection; // Jump strength
+					velocityY = -40 * gravityDirection; // Jump strength
 					isOnGround = false;
 				}
 				break;
@@ -97,7 +122,7 @@ public class PlayerCube
 				isOnGround = false;
 				break;
 			case Mode.Wave:
-				velocityY = -10 * gravityDirection;
+				velocityY = -25 * gravityDirection;
 				isOnGround = false;
 				break;
 			default:

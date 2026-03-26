@@ -20,7 +20,7 @@ class DebugBlock : LevelObject
         this.id = id.dup;
         super(x, y);
     }
-    override void update(ref PlayerCube player)
+    override void update(ref Player player)
     {}
 
     override void draw(int cameraX, int cameraY)

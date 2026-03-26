@@ -12,7 +12,7 @@ class GridBlock05 : Block
         super(x, y);
     }
 
-    override void update(ref PlayerCube player) {}
+    override void update(ref Player player) {}
 
     override void draw(int cameraX, int cameraY)
     {

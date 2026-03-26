@@ -28,7 +28,8 @@ void main()
 
 	Ground ground = new Ground();
 
-	PlayerCube player = new PlayerCube();
+	Player player = new Player();
+	player.mode = Mode.Wave;
 
 	LevelObject[] objects = loadObjectsFromFile(ground);
 

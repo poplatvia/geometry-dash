@@ -10,6 +10,6 @@ abstract class LevelObject {
         this.y = y;
     }
 
-    abstract void update(ref PlayerCube player);
+    abstract void update(ref Player player);
     abstract void draw(int camera, int cameraY);
 }

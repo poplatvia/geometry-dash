@@ -13,7 +13,7 @@ class Spike : LevelObject
         this.size = 55;
         super(x, y);
     }
-    override void update(ref PlayerCube player)
+    override void update(ref Player player)
     {
         // Hitbox will be MUCH smaller than the actual spike for better gameplay
         int playerLeft = cast (int) (player.worldX - player.size / 2);
@@ -56,7 +56,7 @@ class SmallSpike : LevelObject
         this.size = 55;
         super(x, y);
     }
-    override void update(ref PlayerCube player)
+    override void update(ref Player player)
     {
         // Hitbox will be MUCH smaller than the actual spike for better gameplay
         int playerLeft = cast (int) (player.worldX - player.size / 2);
