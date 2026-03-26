@@ -29,11 +29,7 @@ class Spike : LevelObject
         if (playerRight > spikeLeft && playerLeft < spikeRight &&
             playerBottom > spikeTop && playerTop < spikeBottom)
         {
-            // Collision detected, reset player position
-            player.worldX = 0;
-            player.y = 200;
-            player.velocityY = 0;
-            player.isOnGround = true;
+            player.death();
         }
     }
 
@@ -73,10 +69,7 @@ class SmallSpike : LevelObject
             playerBottom > spikeTop && playerTop < spikeBottom)
         {
             // Collision detected, reset player position
-            player.worldX = 0;
-            player.y = 200;
-            player.velocityY = 0;
-            player.isOnGround = true;
+            player.death();
         }
     }
 

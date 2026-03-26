@@ -4,6 +4,7 @@ import raylib;
 import helpers;
 
 import std.conv;
+import std.math.trigonometry;
 
 import models.ground;
 
@@ -11,6 +12,11 @@ enum Mode {
 	Cube,
 	Ship,
 	Wave
+}
+
+struct Point {
+	int x;
+	int y;
 }
 
 // Similar to geometry dash cube
@@ -23,11 +29,13 @@ public class Player
 	int rotation;
 	bool isOnGround;
 	bool isJumping;
+	bool wasJumping;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
 	int speed = 700; // Horizontal speed in pixels per second
 	float worldX; // Player's position in the world
 	float worldY; // Player's position in the world
 	Mode mode;
+	Point[] trail;
 
 	this() 
 	{
@@ -60,7 +68,7 @@ public class Player
 			case Mode.Wave:
 				if (!isJumping)
 				{
-					velocityY += 10 * gravityDirection;
+					velocityY = 25 * gravityDirection;
 				}
 				break;
 			default:
@@ -104,6 +112,13 @@ public class Player
 		else {
 			isJumping = false;
 		}
+
+		if (((isJumping && !wasJumping) || (!isJumping && wasJumping)) && (mode == Mode.Wave))
+		{
+			trail ~= Point(to!int(worldX), y);
+		}
+
+		wasJumping = isJumping;
 	}
 
 	void jump()
@@ -162,23 +177,98 @@ public class Player
 				);
 				break;
 			case Mode.Ship:
+				// Calculate the angle the wave is heading based on velocity
+				float angle = atan2(to!real(velocityY), to!real(speed)) * RAD2DEG;
+				
+				// Define triangle points relative to origin
+				Vector2 p1 = Vector2(0, -size / 2);           // Tip (points forward)
+				Vector2 p2 = Vector2(-size / 2, size / 2);    // Bottom left
+				Vector2 p3 = Vector2(size / 2, size / 2);     // Bottom right
+				
+				auto rotate = (Vector2 point, float rot) {
+					float rad = rot * DEG2RAD;
+					float cos_a = cos(rad);
+					float sin_a = sin(rad);
+					return Vector2(
+						point.x * cos_a - point.y * sin_a,
+						point.x * sin_a + point.y * cos_a
+					);
+				};
+				
+				Vector2 center = Vector2(x, y + worldY);
 				DrawTriangle(
-					Vector2(x, y+worldY - size / 2),
-					Vector2(x - size / 2, y+worldY + size / 2),
-					Vector2(x + size / 2, y+worldY + size / 2),
+					center + rotate(p1, angle),
+					center + rotate(p2, angle),
+					center + rotate(p3, angle),
 					Colors.GREEN
 				);
+				
 				break;
 			case Mode.Wave:
+				// draw a line from the player to each point in the trail
+				if (trail.length > 1)
+				{
+					for (size_t i = 1; i < trail.length; i++)
+					{
+						Point point1 = trail[i - 1];
+						Point point2 = trail[i];
+						// draw line with thickness
+						DrawLineEx(
+							Vector2(point1.x - to!int(worldX) + x, point1.y + to!int(worldY)),
+							Vector2(point2.x - to!int(worldX) + x, point2.y + to!int(worldY)),
+							20,
+							Colors.WHITE
+						);
+					}
+				}
+				
+				// draw an extra line from the player to the last point in the trail
+				if (trail.length > 0)
+				{
+					Point lastPoint = trail[$ - 1];
+					DrawLineEx(
+						Vector2(x, y + to!int(worldY)),
+						Vector2(lastPoint.x - to!int(worldX) + x, lastPoint.y + to!int(worldY)),
+						20,
+						Colors.WHITE
+					);
+				}
+
+				float angle = (velocityY * gravityDirection > 0) ? 135.0f : 45.0f;
+				
+				// Define triangle points relative to origin
+				Vector2 p1 = Vector2(0, -size / 2);           // Tip (points forward)
+				Vector2 p2 = Vector2(-size / 2, size / 2);    // Bottom left
+				Vector2 p3 = Vector2(size / 2, size / 2);     // Bottom right
+				
+				auto rotate = (Vector2 point, float rot) {
+					float rad = rot * DEG2RAD;
+					float cos_a = cos(rad);
+					float sin_a = sin(rad);
+					return Vector2(
+						point.x * cos_a - point.y * sin_a,
+						point.x * sin_a + point.y * cos_a
+					);
+				};
+				
+				Vector2 center = Vector2(x, y + worldY);
 				DrawTriangle(
-					Vector2(x, y+worldY - size / 2),
-					Vector2(x - size / 2, y+worldY + size / 2),
-					Vector2(x + size / 2, y+worldY + size / 2),
+					center + rotate(p1, angle),
+					center + rotate(p2, angle),
+					center + rotate(p3, angle),
 					Colors.PURPLE
 				);
 				break;
 			default:
 				break;
 		}
+	}
+
+	void death() {
+		this.worldX = 0;
+		this.y = 200;
+		this.velocityY = 0;
+		this.isOnGround = true;
+		this.trail = [];
 	}
 }
