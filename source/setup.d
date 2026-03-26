@@ -65,6 +65,12 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
             case "8": // Spike
                 objects ~= new Spike(x - offset, (ground.groundY()) - y/2);
                 break;
+            case "12": // cube portal
+                objects ~= new CubePortal(x - offset, (ground.groundY()) - y/2 + offset);
+                break;
+            case "13": // ship portal
+                objects ~= new ShipPortal(x - offset, (ground.groundY()) - y/2 + offset);
+                break;
             case "39": // small spike
                 objects ~= new SmallSpike(x - offset, (ground.groundY()) - y + offset);
                 break;

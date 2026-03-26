@@ -86,3 +86,49 @@ public class GreenPortal : Portal
 		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.GREEN);
 	}
 }
+
+public class CubePortal : Portal
+{
+	private bool wasColliding = false;
+
+	this(int x, int y) { super(x, y); }
+
+	override void update(ref PlayerCube player)
+	{
+		bool colliding = isColliding(player);
+		if (colliding && !wasColliding)
+		{
+			player.mode = Mode.Cube;
+		}
+
+		wasColliding = colliding;
+	}
+
+	override void draw(int cameraX, int cameraY)
+	{
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.GREEN);
+	}
+}
+
+public class ShipPortal : Portal
+{
+	private bool wasColliding = false;
+
+	this(int x, int y) { super(x, y); }
+
+	override void update(ref PlayerCube player)
+	{
+		bool colliding = isColliding(player);
+		if (colliding && !wasColliding)
+		{
+			player.mode = Mode.Ship;
+		}
+
+		wasColliding = colliding;
+	}
+
+	override void draw(int cameraX, int cameraY)
+	{
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.PURPLE);
+	}
+}
