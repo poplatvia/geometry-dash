@@ -8,14 +8,14 @@ class Ground
 
 	int groundY() { return GetScreenHeight() - groundConst(); }
 
-	void draw(int cameraX)
+	void draw(int cameraX, int cameraY)
 	{
 		int posY = groundY();
-		DrawRectangle(0, posY, GetScreenWidth(), groundConst(), Colors.DARKBLUE);
+		DrawRectangle(0, posY+cameraY, GetScreenWidth(), groundConst(), Colors.DARKBLUE);
 		// make small white lines at intervals of 1000
 		for (int x = -cameraX % 1000; x < GetScreenWidth(); x += 1000)
 		{
-			DrawLine(x, posY, x, GetScreenHeight(), Colors.WHITE);
+			DrawLine(x, posY+cameraY, x, GetScreenHeight(), Colors.WHITE);
 		}
 	}
 }

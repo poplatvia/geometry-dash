@@ -13,6 +13,18 @@ import models.block;
 import models.debug_block;
 import models.level_object;
 
+import models.blocks.GridBlock01;
+import models.blocks.GridBlock02;
+import models.blocks.GridBlock03;
+import models.blocks.GridBlock04;
+import models.blocks.GridBlock05;
+import models.blocks.GridBlock06;
+import models.blocks.GridBlock07;
+import models.blocks.GridBlock08;
+import models.platforms.RegularPlatform01;
+
+
+
 LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.csv")
 {
     string[] lines = readText(filename).splitLines();
@@ -41,11 +53,23 @@ LevelObject[] loadObjectsFromFile(ref Ground ground, string filename = "level.cs
             case "1": // block
                 objects ~= new Block(x - offset, (ground.groundY()) - y/2);
                 break;
+            case "2": // GridBlock02
+                objects ~= new GridBlock02(x - offset, (ground.groundY()) - y/2);
+                break;
+            case "3": // GridBlock03
+                objects ~= new GridBlock03(x - offset, (ground.groundY()) - y/2);
+                break;
+            case "7": // GridBlock08
+                objects ~= new GridBlock08(x - offset, (ground.groundY()) - y/2);
+                break;
             case "8": // Spike
                 objects ~= new Spike(x - offset, (ground.groundY()) - y/2);
                 break;
             case "39": // small spike
                 objects ~= new SmallSpike(x - offset, (ground.groundY()) - y + offset);
+                break;
+            case "40": // RegularPlatform01
+                objects ~= new RegularPlatform01(x - offset, (ground.groundY()) - y/2);
                 break;
             case "83": // block made of 9 subblocks
                 objects ~= new Block(x - offset, (ground.groundY()) - y/2);

@@ -34,9 +34,9 @@ class Orb : LevelObject
             onTouch(player);
     }
 
-    override void draw(int cameraX)
+    override void draw(int cameraX, int cameraY)
     {
-        DrawCircle(x - cameraX, y, radius, Colors.GRAY);
+        DrawCircle(x - cameraX, y - cameraY, radius, Colors.GRAY);
     }
 }
 
@@ -50,11 +50,11 @@ class YellowOrb : Orb
         player.isOnGround = false;
     }
 
-    override void draw(int cameraX)
+    override void draw(int cameraX, int cameraY)
     {
-        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
-        DrawRing(Vector2(x - cameraX, y), 35, 40, 0, 360, 16, Colors.WHITE);
-        DrawCircle(x - cameraX, y, 35, Colors.YELLOW);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 35, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y - cameraY, 35, Colors.YELLOW);
     }
 }
 
@@ -67,11 +67,11 @@ class PurpleOrb : Orb
 		player.velocityY = -5 * player.gravityDirection; // Weaker jump
 	}
 
-	override void draw(int cameraX)
+	override void draw(int cameraX, int cameraY)
 	{
-        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
-        DrawRing(Vector2(x - cameraX, y), 30, 35, 0, 360, 16, Colors.WHITE);
-        DrawCircle(x - cameraX, y, 30, Colors.PURPLE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 30, 35, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y - cameraY, 30, Colors.PURPLE);
 	}
 }
 
@@ -84,12 +84,12 @@ class BlackOrb : Orb
 		player.velocityY = 100 * player.gravityDirection;
 	}
 
-	override void draw(int cameraX)
-	{
-        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
-        DrawRing(Vector2(x - cameraX, y), 35, 40, 0, 360, 16, Colors.WHITE);
-        DrawCircle(x - cameraX, y, 35, Colors.BLACK);
-	}
+	override void draw(int cameraX, int cameraY)
+    {
+        DrawRing(Vector2(x - cameraX, y - cameraY), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 35, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y - cameraY, 35, Colors.BLACK);
+    }
 }
 
 class RedOrb : Orb
@@ -101,10 +101,10 @@ class RedOrb : Orb
 		player.velocityY = -25 * player.gravityDirection; // Stronger jump
 	}
 
-	override void draw(int cameraX)
+	override void draw(int cameraX, int cameraY)
 	{
-        DrawRing(Vector2(x - cameraX, y), 50, 55, 0, 360, 16, Colors.WHITE);
-        DrawRing(Vector2(x - cameraX, y), 45, 40, 0, 360, 16, Colors.WHITE);
-        DrawCircle(x - cameraX, y, 40, Colors.ORANGE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 50, 55, 0, 360, 16, Colors.WHITE);
+        DrawRing(Vector2(x - cameraX, y - cameraY), 45, 40, 0, 360, 16, Colors.WHITE);
+        DrawCircle(x - cameraX, y - cameraY, 40, Colors.ORANGE);
 	}
 }

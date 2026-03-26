@@ -1,4 +1,4 @@
-module models.block;
+module models.platforms.platform;
 
 import raylib;
 
@@ -7,7 +7,7 @@ import models.player;
 
 import helpers;
 
-class Block : LevelObject
+class Platform : LevelObject
 {
     int size;
     this(int x, int y)
@@ -45,7 +45,7 @@ class Block : LevelObject
         int drawX = x - cameraX - size / 2;
         int drawY = y + cameraY - size / 2;
 
-        DrawRectangle(drawX, drawY, size, size, Colors.BLACK);
-        DrawRectangleLinesEx(Rectangle(drawX, drawY, size, size), 5, Colors.WHITE);
+        DrawRectangle(drawX, drawY, size, size/2, Colors.BLACK);
+        DrawRectangleLinesEx(Rectangle(drawX, drawY, size, size/2), 5, Colors.WHITE);
     }
 }

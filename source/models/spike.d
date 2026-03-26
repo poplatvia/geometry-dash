@@ -37,12 +37,12 @@ class Spike : LevelObject
         }
     }
 
-    override void draw(int cameraX)
+    override void draw(int cameraX, int cameraY)
     {
         DrawTriangle(
-            Vector2((x - cameraX) - size, y + size),
-            Vector2((x - cameraX) + size, y + size),
-            Vector2((x - cameraX), y - size),
+            Vector2((x - cameraX) - size, y + size + cameraY),
+            Vector2((x - cameraX) + size, y + size + cameraY),
+            Vector2((x - cameraX), y - size + cameraY),
             Colors.GRAY
         );
     }
@@ -80,12 +80,12 @@ class SmallSpike : LevelObject
         }
     }
 
-    override void draw(int cameraX)
+    override void draw(int cameraX, int cameraY)
     {
         DrawTriangle(
-            Vector2((x - cameraX) - size, y - size/5),
-            Vector2((x - cameraX) + size, y - size/5),
-            Vector2((x - cameraX), y - size),
+            Vector2((x - cameraX) - size, y - size/5 + cameraY),
+            Vector2((x - cameraX) + size, y - size/5 + cameraY),
+            Vector2((x - cameraX), y - size + cameraY),
             Colors.GRAY
         );
     }

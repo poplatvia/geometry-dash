@@ -17,11 +17,13 @@ public class PlayerCube
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
 	int speed = 700; // Horizontal speed in pixels per second
 	float worldX; // Player's position in the world
+	float worldY; // Player's position in the world
 
 	this() 
 	{
 		this.x = 710; // dynamically calculate this later based on screen size
 		this.worldX = -500; // dynamically calculate this later based on screen size
+		this.worldY = 0;
 		this.y = 500;
 		this.size = 110; // dynamically calculate this later based on screen size
 		this.velocityY = 0;
@@ -42,7 +44,7 @@ public class PlayerCube
 			rotation += 5 * gravityDirection;
 
 		int floorY = ground.groundY() - size / 2;
-		int ceilY  = size / 2;
+		int ceilY  = size / 2 - 10000;
 
 		if (y >= floorY)
 		{
@@ -84,7 +86,7 @@ public class PlayerCube
 		Vector2 origin = Vector2(size / 2.0f, size / 2.0f);
 
 		DrawRectanglePro(
-			Rectangle(x, y, size, size),
+			Rectangle(x, y+worldY, size, size),
 			origin,  // pivot point (center)
 			r,
 			Colors.BLUE
@@ -92,7 +94,7 @@ public class PlayerCube
 
 		int inner1 = size/2 + size/8;
 		DrawRectanglePro(
-			Rectangle(x, y, inner1, inner1),
+			Rectangle(x, y+worldY, inner1, inner1),
 			Vector2(inner1 / 2.0f, inner1 / 2.0f),
 			r,
 			Colors.BLACK
@@ -100,7 +102,7 @@ public class PlayerCube
 
 		int inner2 = size/4;
 		DrawRectanglePro(
-			Rectangle(x, y, inner2, inner2),
+			Rectangle(x, y+worldY, inner2, inner2),
 			Vector2(inner2 / 2.0f, inner2 / 2.0f),
 			r,
 			Colors.WHITE

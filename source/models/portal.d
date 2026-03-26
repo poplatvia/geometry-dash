@@ -37,9 +37,9 @@ class BluePortal : Portal
 		}
 	}
 
-	override void draw(int cameraX)
+	override void draw(int cameraX, int cameraY)
 	{
-		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.BLUE);
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.BLUE);
 	}
 }
 
@@ -57,9 +57,9 @@ class YellowPortal : Portal
 		}
 	}
 
-	override void draw(int cameraX)
+	override void draw(int cameraX, int cameraY)
 	{
-		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.YELLOW);
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.YELLOW);
 	}
 }
 
@@ -81,8 +81,8 @@ public class GreenPortal : Portal
 		wasColliding = colliding;
 	}
 
-	override void draw(int cameraX)
+	override void draw(int cameraX, int cameraY)
 	{
-		DrawRectangle(x - width / 2 - cameraX, y - height * 2, width, height * 3, Colors.GREEN);
+		DrawRectangle(x - width / 2 - cameraX, y - height * 2 - cameraY, width, height * 3, Colors.GREEN);
 	}
 }

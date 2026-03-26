@@ -37,6 +37,7 @@ void main()
 	DebugView debugView = new DebugView();
 
 	float cameraX = 0;
+	float cameraY = 0;
 
     while (!WindowShouldClose())
     {
@@ -51,20 +52,33 @@ void main()
 		{
 			float dt = GetFrameTime();
 			player.worldX -= player.speed * dt;
-			cameraX = player.worldX - player.x;
+			cameraX = player.worldX + player.x;
 		}
+
+		if (IsKeyDown(KeyboardKey.KEY_W))
+		{
+			player.worldY += 10;
+			cameraY = player.worldY;
+		}
+
+		if (IsKeyDown(KeyboardKey.KEY_S))
+		{
+			player.worldY -= 10;
+			cameraY = player.worldY;
+		}
+
+		player.update(ground);
 
         BeginDrawing();
         background.draw(cast (int) cameraX);
-		ground.draw(cast (int) cameraX);
+		ground.draw(cast (int) cameraX, cast (int) cameraY);
 		foreach (LevelObject object ; objects)
 		{
 			object.update(player);
-			object.draw(cast (int) cameraX);
+			object.draw(cast (int) cameraX, cast (int) cameraY);
 		}
-		player.update(ground);
 		player.draw();
-		debugView.draw(cast (int) cameraX, ground);
+		//debugView.draw(cast (int) cameraX, ground);
         EndDrawing();
     }
     CloseWindow();
