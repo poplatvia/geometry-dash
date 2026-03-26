@@ -44,15 +44,16 @@ void main()
 		if (IsKeyDown(KeyboardKey.KEY_D))
 			{
 			float dt = GetFrameTime();
-			player.worldX += player.speed * dt;
+			// REMEMBER THIS NUMBER
+			player.worldX += player.speed * dt * 1.64;
 			cameraX = player.worldX - player.x;
 		}
 
 		if (IsKeyDown(KeyboardKey.KEY_A))
 		{
 			float dt = GetFrameTime();
-			player.worldX -= player.speed * dt;
-			cameraX = player.worldX + player.x;
+			player.worldX -= player.speed * dt * 1.64;
+			cameraX = player.worldX - player.x;
 		}
 
 		if (IsKeyDown(KeyboardKey.KEY_W))

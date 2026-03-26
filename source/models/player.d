@@ -3,6 +3,8 @@ module models.player;
 import raylib;
 import helpers;
 
+import std.conv;
+
 import models.ground;
 
 enum Mode {
@@ -17,7 +19,7 @@ public class PlayerCube
 	int x;
 	int y;
 	int size;
-	int velocityY;
+	float velocityY;
 	int rotation;
 	bool isOnGround;
 	int gravityDirection = 1; // 1 for normal gravity, -1 for reversed
@@ -45,8 +47,8 @@ public class PlayerCube
 
 	void update(Ground ground)
 	{
-		velocityY += gravityDirection;
-		y += velocityY;
+		velocityY += gravityDirection * 1.64;
+		y += to!int(velocityY);
 
 		if (!isOnGround)
 			rotation += 5 * gravityDirection;
@@ -86,7 +88,7 @@ public class PlayerCube
 			case Mode.Cube:
 				if (isOnGround)
 				{
-					velocityY = -20 * gravityDirection; // Jump strength
+					velocityY = -32 * gravityDirection; // Jump strength
 					isOnGround = false;
 				}
 				break;
